@@ -23,7 +23,7 @@ class PhotosDataSource: NSObject, UICollectionViewDataSource {
             return .init()
         }
         cell.configure(photo: photos[indexPath.row])
-        cell.layer.borderWidth = 2
+        cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.white.cgColor
         return cell
     }

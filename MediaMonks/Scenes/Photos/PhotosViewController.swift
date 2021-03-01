@@ -26,6 +26,7 @@ class PhotosViewController: UIViewController, PhotosViewControllerProtocol {
 
     // MARK: Properties
     private let datasource = PhotosDataSource()
+    private var animationIndex: [IndexPath] = []
 
     // MARK: DI
     var interactor: PhotosInteractorProtocol?
@@ -61,8 +62,8 @@ class PhotosViewController: UIViewController, PhotosViewControllerProtocol {
 
     func setupCollectionViewLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
-            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .estimated(150)))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(175)), subitems: [item])
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .absolute(120)))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(120)), subitems: [item])
             let section = NSCollectionLayoutSection(group: group)
             return section
         }
@@ -79,11 +80,16 @@ class PhotosViewController: UIViewController, PhotosViewControllerProtocol {
 
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.transform = CGAffineTransform(translationX: 0.0, y: cell.frame.height)
-        cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOffset = CGSize(width: 10, height: 10)
-        cell.alpha = 0
-        UIView.beginAnimations("rotation", context: nil)
+        if animationIndex.contains(indexPath) == false {
+            cell.transform = CGAffineTransform(translationX: 0, y: collectionView.frame.height / 2)
+            cell.alpha = 0
+
+            UIView.animate(withDuration: 0.5, delay: 0.05*Double(indexPath.row), options: [.curveEaseInOut], animations: {
+                cell.transform = CGAffineTransform(translationX: 0, y: 0)
+                cell.alpha = 1
+            }, completion: nil)
+            animationIndex.append(indexPath)
+        }
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -95,7 +101,5 @@ extension PhotosViewController: UICollectionViewDelegate {
             interactor?.loadNextPage()
         }
     }
-    
 }
-
 
