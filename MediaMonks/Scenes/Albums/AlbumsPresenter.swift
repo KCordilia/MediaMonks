@@ -15,9 +15,8 @@ import UIKit
 
 protocol AlbumsPresenterProtocol {
     func set(viewController: AlbumsViewControllerProtocol?)
+    func presentAlbums(albums: [Album])
 
-    // add the functions that are called from interactor
-    func handle(error: Error)
 }
 
 class AlbumsPresenter: AlbumsPresenterProtocol {
@@ -28,12 +27,13 @@ class AlbumsPresenter: AlbumsPresenterProtocol {
     func set(viewController: AlbumsViewControllerProtocol?) {
         self.viewController = viewController
     }
+
+    func presentAlbums(albums: [Album]) {
+        viewController?.displayAlbums(albums: albums)
+    }
 }
 
 // MARK: Methods
 extension  AlbumsPresenter {
 
-    func handle(error: Error) {
-        viewController?.display(error: error)
-    }
 }

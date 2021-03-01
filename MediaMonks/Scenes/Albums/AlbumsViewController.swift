@@ -13,15 +13,18 @@
 
 import UIKit
 
-protocol AlbumsViewControllerProtocol: class, UIViewControllerRouting {
+protocol AlbumsViewControllerProtocol: UIViewControllerRouting {
     func set(interactor: AlbumsInteractorProtocol)
     func set(router: AlbumsRouterProtocol)
-
-    // add the functions that are called from the presenter
-    func display(error: Error)
+    func displayAlbums(albums: [Album])
 }
 
 class AlbumsViewController: UIViewController, AlbumsViewControllerProtocol {
+    // MARK: Outlets
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    // MARK: Properties
+    private let datasource = AlbumsDataSource()
 
     // MARK: DI
     var interactor: AlbumsInteractorProtocol?
@@ -34,25 +37,53 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerProtocol {
     func set(router: AlbumsRouterProtocol) {
         self.router = router
     }
-    
-
-    // MARK: Outlets
-
-    // MARK: Properties
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        interactor?.handleViewDidLoad()
+        setupNavigationBar()
+        setupCollectionView()
+    }
+
+    // MARK: Methods
+    func setupNavigationBar() {
+        let imageView = UIImageView(image: R.image.logoMm())
+        imageView.contentMode = .scaleAspectFit
+        self.navigationItem.titleView = imageView
+    }
+
+    func setupCollectionView() {
+        collectionView.register(R.nib.albumCollectionViewCell)
+        collectionView.delegate = self
+        collectionView.dataSource = datasource
+        collectionView.collectionViewLayout = setupCollectionViewLayout()
+    }
+
+    func setupCollectionViewLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .estimated(175)))
+            item.contentInsets.trailing = 16
+            item.contentInsets.bottom = 32
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300)), subitems: [item])
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = .init(top: 32, leading: 16, bottom: 0, trailing: 0)
+            return section
+        }
+    }
+
+    func displayAlbums(albums: [Album]) {
+        datasource.set(albums: albums)
+        collectionView.reloadData()
     }
 
     // MARK: Actions
 
+
 }
 
-// MARK: Methods
-extension AlbumsViewController {
-
-    func display(error: Error) {
-        //TO DO: better error handling
+extension AlbumsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
     }
 }

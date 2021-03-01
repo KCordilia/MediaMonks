@@ -12,17 +12,42 @@
 //  This template is meant to work with Swinject.
 
 import UIKit
+import Moya
+import RxSwift
 
 protocol AlbumsInteractorProtocol {
-    // add the functions that are called from the view controller
+    func handleViewDidLoad()
+    func getAlbums(page: Int)
+
 }
 
 class AlbumsInteractor: AlbumsInteractorProtocol {
 
     // MARK: DI
     var presenter: AlbumsPresenterProtocol
+    private let provider: MoyaProvider<AlbumService>!
+    private let disposeBag = DisposeBag()
+    var page = 1
 
-    init(presenter: AlbumsPresenterProtocol) {
+    init(presenter: AlbumsPresenterProtocol,
+         provider: MoyaProvider<AlbumService>) {
         self.presenter = presenter
+        self.provider = provider
+    }
+
+    func handleViewDidLoad() {
+        getAlbums(page: page)
+    }
+
+    func getAlbums(page: Int) {
+        provider.rx
+            .request(.getAlbums(page: page))
+            .filterSuccessfulStatusCodes()
+            .map([Album].self)
+            .subscribe { [weak self] albums in
+                self?.presenter.presentAlbums(albums: albums)
+            } onError: { error in
+                print(error)
+            }.disposed(by: disposeBag)
     }
 }

@@ -14,8 +14,8 @@ class AlbumsAssembly: Assembly {
         // MARK: Home
         container.register(AlbumsRouterProtocol.self) { resolver in
             return AlbumsRouter(
-                rootNavigator: resolver ~> (RootNavigatorProtocol.self)
-//                photosStoryboard: resolver ~> (Storyboard.self, name: R.storyboard.photos.name)
+                rootNavigator: resolver ~> (RootNavigatorProtocol.self),
+                photosStoryboard: resolver ~> (Storyboard.self, name: R.storyboard.photos.name)
             )
         }
 

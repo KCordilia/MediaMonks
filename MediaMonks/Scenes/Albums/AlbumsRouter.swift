@@ -23,15 +23,18 @@ class AlbumsRouter: NSObject, AlbumsRouterProtocol {
     //MARK: DI
     weak var viewController: AlbumsViewControllerProtocol?
     private let rootNavigator: RootNavigatorProtocol
+    private let photosStoryboard: Storyboard
 
     func set(viewController: AlbumsViewControllerProtocol?) {
         self.viewController = viewController
     }
 
     init(
-        rootNavigator: RootNavigatorProtocol
+        rootNavigator: RootNavigatorProtocol,
+        photosStoryboard: Storyboard
     ) {
         self.rootNavigator = rootNavigator
+        self.photosStoryboard = photosStoryboard
     }
 }
 
@@ -39,14 +42,15 @@ class AlbumsRouter: NSObject, AlbumsRouterProtocol {
 extension AlbumsRouter {
 
     enum Scene {
-        case destination1
+        case photos(albumId: Int)
     }
 
     func route(to scene: AlbumsRouter.Scene) {
         switch scene {
-        case .destination1:
-            /// TODO: Implement routing
-            break
+        case .photos(let albumId):
+            guard let vc = photosStoryboard.viewController(identifier: PhotosStoryboardId.photos) as? PhotosViewController else { return }
+            vc.set(albumId: albumId)
+            viewController?.show(vc, sender: nil)
         }
     }
 }

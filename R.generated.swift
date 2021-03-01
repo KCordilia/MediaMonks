@@ -89,12 +89,14 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 2 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.
   struct storyboard {
     /// Storyboard `Albums`.
     static let albums = _R.storyboard.albums()
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
+    /// Storyboard `Photos`.
+    static let photos = _R.storyboard.photos()
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "Albums", bundle: ...)`
@@ -107,6 +109,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
     static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Photos", bundle: ...)`
+    static func photos(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.photos)
     }
     #endif
 
@@ -127,6 +136,58 @@ struct R: Rswift.Validatable {
       return UIKit.UIColor(resource: R.color.accentColor, compatibleWith: traitCollection)
     }
     #endif
+
+    fileprivate init() {}
+  }
+
+  /// This `R.image` struct is generated, and contains static references to 2 images.
+  struct image {
+    /// Image `AlbumIcon`.
+    static let albumIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "AlbumIcon")
+    /// Image `logo-mm`.
+    static let logoMm = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo-mm")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "AlbumIcon", bundle: ..., traitCollection: ...)`
+    static func albumIcon(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.albumIcon, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "logo-mm", bundle: ..., traitCollection: ...)`
+    static func logoMm(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.logoMm, compatibleWith: traitCollection)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
+
+  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  struct nib {
+    /// Nib `AlbumCollectionViewCell`.
+    static let albumCollectionViewCell = _R.nib._AlbumCollectionViewCell()
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "AlbumCollectionViewCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.albumCollectionViewCell) instead")
+    static func albumCollectionViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.albumCollectionViewCell)
+    }
+    #endif
+
+    static func albumCollectionViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> AlbumCollectionViewCell? {
+      return R.nib.albumCollectionViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? AlbumCollectionViewCell
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  struct reuseIdentifier {
+    /// Reuse identifier `AlbumCollectionViewCell`.
+    static let albumCollectionViewCell: Rswift.ReuseIdentifier<AlbumCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "AlbumCollectionViewCell")
 
     fileprivate init() {}
   }
@@ -152,6 +213,26 @@ struct _R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
+  struct nib {
+    struct _AlbumCollectionViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = AlbumCollectionViewCell
+
+      let bundle = R.hostingBundle
+      let identifier = "AlbumCollectionViewCell"
+      let name = "AlbumCollectionViewCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> AlbumCollectionViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? AlbumCollectionViewCell
+      }
+
+      fileprivate init() {}
+    }
+
+    fileprivate init() {}
+  }
+  #endif
+
+  #if os(iOS) || os(tvOS)
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       #if os(iOS) || os(tvOS)
@@ -160,11 +241,14 @@ struct _R: Rswift.Validatable {
       #if os(iOS) || os(tvOS)
       try launchScreen.validate()
       #endif
+      #if os(iOS) || os(tvOS)
+      try photos.validate()
+      #endif
     }
 
     #if os(iOS) || os(tvOS)
     struct albums: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = AlbumsViewController
+      typealias InitialController = NavigationController
 
       let albumsViewController = StoryboardViewControllerResource<AlbumsViewController>(identifier: "AlbumsViewController")
       let bundle = R.hostingBundle
@@ -194,6 +278,26 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct photos: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "Photos"
+      let photosViewController = StoryboardViewControllerResource<PhotosViewController>(identifier: "PhotosViewController")
+
+      func photosViewController(_: Void = ()) -> PhotosViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: photosViewController)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.photos().photosViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'photosViewController' could not be loaded from storyboard 'Photos' as 'PhotosViewController'.") }
       }
 
       fileprivate init() {}
