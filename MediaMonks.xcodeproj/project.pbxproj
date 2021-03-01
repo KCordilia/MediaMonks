@@ -26,6 +26,9 @@
 		8AFE562B25ECEC60001941DD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE562A25ECEC60001941DD /* R.generated.swift */; };
 		8AFE563025ECED76001941DD /* AlbumsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE562F25ECED76001941DD /* AlbumsAssembly.swift */; };
 		8AFE563425ECED8C001941DD /* AlbumsStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE563325ECED8C001941DD /* AlbumsStoryboard.swift */; };
+		8AFE563725ECEFB7001941DD /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE563625ECEFB7001941DD /* URLs.swift */; };
+		8AFE563B25ECEFFD001941DD /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE563A25ECEFFD001941DD /* AlbumService.swift */; };
+		8AFE563F25ECF033001941DD /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE563E25ECF033001941DD /* Album.swift */; };
 		D159E0B652EE69ACEAE33E74 /* Pods_MediaMonks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C086C8950F082A7669338F /* Pods_MediaMonks.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +55,9 @@
 		8AFE562A25ECEC60001941DD /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		8AFE562F25ECED76001941DD /* AlbumsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsAssembly.swift; sourceTree = "<group>"; };
 		8AFE563325ECED8C001941DD /* AlbumsStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsStoryboard.swift; sourceTree = "<group>"; };
+		8AFE563625ECEFB7001941DD /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
+		8AFE563A25ECEFFD001941DD /* AlbumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
+		8AFE563E25ECF033001941DD /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		BB2D6139798CBBC74CF28B20 /* Pods-MediaMonks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaMonks.release.xcconfig"; path = "Target Support Files/Pods-MediaMonks/Pods-MediaMonks.release.xcconfig"; sourceTree = "<group>"; };
 		D3C086C8950F082A7669338F /* Pods_MediaMonks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaMonks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -128,6 +134,9 @@
 		8AFE55D225ECE655001941DD /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				8AFE563D25ECF025001941DD /* Models */,
+				8AFE563925ECEFF1001941DD /* Services */,
+				8AFE563625ECEFB7001941DD /* URLs.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -167,6 +176,22 @@
 				8AFE563325ECED8C001941DD /* AlbumsStoryboard.swift */,
 			);
 			path = AlbumsDI;
+			sourceTree = "<group>";
+		};
+		8AFE563925ECEFF1001941DD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8AFE563A25ECEFFD001941DD /* AlbumService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8AFE563D25ECF025001941DD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8AFE563E25ECF033001941DD /* Album.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B90C12DD8D32861CCFC3EAAC /* Pods */ = {
@@ -323,8 +348,11 @@
 			files = (
 				8AFE55BB25ECE554001941DD /* AppDelegate.swift in Sources */,
 				8AFE560B25ECEAE2001941DD /* TopViewController.swift in Sources */,
+				8AFE563F25ECF033001941DD /* Album.swift in Sources */,
 				8AFE562B25ECEC60001941DD /* R.generated.swift in Sources */,
+				8AFE563725ECEFB7001941DD /* URLs.swift in Sources */,
 				8AFE561825ECEB43001941DD /* AlbumsRouter.swift in Sources */,
+				8AFE563B25ECEFFD001941DD /* AlbumService.swift in Sources */,
 				8AFE561725ECEB43001941DD /* AlbumsPresenter.swift in Sources */,
 				8AFE560225ECEABA001941DD /* UIApplicationProtocol.swift in Sources */,
 				8AFE560825ECEAD7001941DD /* UIViewControllerRouting.swift in Sources */,

@@ -28,8 +28,7 @@ class SharedAssembly: Assembly {
         }
 
         // MARK: Services
-//        container.register(MoyaProvider<AlbumService>.self) { _ in MoyaProvider<AlbumService>() }
-//        container.register(MoyaProvider<PhotoService>.self) { _ in MoyaProvider<PhotoService>() }
+        container.register(MoyaProvider<AlbumService>.self) { _ in MoyaProvider<AlbumService>() }
 
         // MARK: Storyboards
 
