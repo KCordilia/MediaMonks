@@ -37,7 +37,9 @@
                             <constraint firstItem="H5z-ij-X8p" firstAttribute="trailing" secondItem="EpY-vo-M6E" secondAttribute="trailing" id="do4-QL-T2U"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="TFr-Y1-Q2Z"/>
+                    <navigationItem key="navigationItem" id="TFr-Y1-Q2Z">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Ozg-KC-h2w"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="EpY-vo-M6E" id="LPD-j8-YLI"/>
                     </connections>

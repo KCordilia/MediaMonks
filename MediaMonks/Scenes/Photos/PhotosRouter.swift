@@ -23,18 +23,15 @@ class PhotosRouter: NSObject, PhotosRouterProtocol {
     //MARK: DI
     weak var viewController: PhotosViewControllerProtocol?
     private let rootNavigator: RootNavigatorProtocol
-    private let destinationStoryboard: Storyboard
 
     func set(viewController: PhotosViewControllerProtocol?) {
         self.viewController = viewController
     }
 
     init(
-        rootNavigator: RootNavigatorProtocol,
-        destinationStoryboard: Storyboard
+        rootNavigator: RootNavigatorProtocol
     ) {
         self.rootNavigator = rootNavigator
-        self.destinationStoryboard = destinationStoryboard
     }
 }
 

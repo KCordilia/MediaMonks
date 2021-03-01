@@ -13,15 +13,19 @@
 
 import UIKit
 
-protocol PhotosViewControllerProtocol: class, UIViewControllerRouting {
+protocol PhotosViewControllerProtocol: UIViewControllerRouting {
     func set(interactor: PhotosInteractorProtocol)
     func set(router: PhotosRouterProtocol)
-
-    // add the functions that are called from the presenter
-    func display(error: Error)
+    func set(albumId: Int)
+    func displayPhotos(photos: [Photo])
 }
 
 class PhotosViewController: UIViewController, PhotosViewControllerProtocol {
+    // MARK: Outlets
+    @IBOutlet weak var collectionView: UICollectionView!
+
+    // MARK: Properties
+    private let datasource = PhotosDataSource()
 
     // MARK: DI
     var interactor: PhotosInteractorProtocol?
@@ -34,26 +38,64 @@ class PhotosViewController: UIViewController, PhotosViewControllerProtocol {
     func set(router: PhotosRouterProtocol) {
         self.router = router
     }
-    
 
-    // MARK: Outlets
-
-    // MARK: Properties
+    func set(albumId: Int) {
+        interactor?.set(albumId: albumId)
+    }
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Photo's"
+        interactor?.handleViewDidLoad()
+        setupCollectionView()
+    }
+
+    // MARK: Methods
+    func setupCollectionView() {
+        collectionView.register(R.nib.photoCollectionViewCell)
+        collectionView.delegate = self
+        collectionView.dataSource = datasource
+        collectionView.collectionViewLayout = setupCollectionViewLayout()
+    }
+
+    func setupCollectionViewLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .estimated(150)))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(175)), subitems: [item])
+            let section = NSCollectionLayoutSection(group: group)
+            return section
+        }
+    }
+
+    func displayPhotos(photos: [Photo]) {
+        datasource.set(photos: photos)
+        collectionView.reloadData()
     }
 
     // MARK: Actions
 
 }
 
-// MARK: Methods
-extension PhotosViewController {
-
-    func display(error: Error) {
-        //TO DO: better error handling
-        
+extension PhotosViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cell.transform = CGAffineTransform(translationX: 0.0, y: cell.frame.height)
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOffset = CGSize(width: 10, height: 10)
+        cell.alpha = 0
+        UIView.beginAnimations("rotation", context: nil)
     }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+
+        if offsetY > contentHeight - height {
+            interactor?.loadNextPage()
+        }
+    }
+    
 }
+
+

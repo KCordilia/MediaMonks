@@ -15,9 +15,7 @@ import UIKit
 
 protocol PhotosPresenterProtocol {
     func set(viewController: PhotosViewControllerProtocol?)
-
-    // add the functions that are called from interactor
-    func handle(error: Error)
+    func presentPhotos(photos: [Photo])
 }
 
 class PhotosPresenter: PhotosPresenterProtocol {
@@ -28,12 +26,10 @@ class PhotosPresenter: PhotosPresenterProtocol {
     func set(viewController: PhotosViewControllerProtocol?) {
         self.viewController = viewController
     }
-}
 
-// MARK: Methods
-extension  PhotosPresenter {
-
-    func handle(error: Error) {
-        viewController?.display(error: error)
+    // MARK: Methods
+    func presentPhotos(photos: [Photo]) {
+        viewController?.displayPhotos(photos: photos)
     }
+
 }

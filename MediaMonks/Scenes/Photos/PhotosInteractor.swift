@@ -12,17 +12,56 @@
 //  This template is meant to work with Swinject.
 
 import UIKit
+import Moya
+import RxSwift
+import CoreData
 
 protocol PhotosInteractorProtocol {
-    // add the functions that are called from the view controller
+    func set(albumId: Int)
+    func handleViewDidLoad()
+    func loadNextPage()
 }
 
 class PhotosInteractor: PhotosInteractorProtocol {
 
     // MARK: DI
     var presenter: PhotosPresenterProtocol
+    private let provider: MoyaProvider<PhotoService>!
+    private let disposeBag = DisposeBag()
 
-    init(presenter: PhotosPresenterProtocol) {
+    private var page: Int = 1
+    var albumId: Int?
+
+    init(presenter: PhotosPresenterProtocol,
+         provider: MoyaProvider<PhotoService>) {
         self.presenter = presenter
+        self.provider = provider
+    }
+
+    func set(albumId: Int) {
+        self.albumId = albumId
+    }
+
+    func handleViewDidLoad() {
+        guard let albumId = albumId else { return }
+        getPhotos(albumId: albumId, page: page)
+    }
+
+    func getPhotos(albumId: Int, page: Int) {
+        provider.rx
+            .request(.getPhotos(albumId: albumId, page: page))
+            .filterSuccessfulStatusCodes()
+            .map([Photo].self)
+            .subscribe { [weak self] photos in
+                self?.presenter.presentPhotos(photos: photos)
+            } onError: { error in
+                print(error)
+            }.disposed(by: disposeBag)
+    }
+
+    func loadNextPage() {
+        page += 1
+        guard let albumId = albumId else { return }
+        getPhotos(albumId: albumId, page: page)
     }
 }

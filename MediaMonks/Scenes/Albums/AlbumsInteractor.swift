@@ -18,7 +18,7 @@ import RxSwift
 protocol AlbumsInteractorProtocol {
     func handleViewDidLoad()
     func getAlbums(page: Int)
-
+    func loadNextPage()
 }
 
 class AlbumsInteractor: AlbumsInteractorProtocol {
@@ -27,7 +27,7 @@ class AlbumsInteractor: AlbumsInteractorProtocol {
     var presenter: AlbumsPresenterProtocol
     private let provider: MoyaProvider<AlbumService>!
     private let disposeBag = DisposeBag()
-    var page = 1
+    private var page = 1
 
     init(presenter: AlbumsPresenterProtocol,
          provider: MoyaProvider<AlbumService>) {
@@ -49,5 +49,10 @@ class AlbumsInteractor: AlbumsInteractorProtocol {
             } onError: { error in
                 print(error)
             }.disposed(by: disposeBag)
+    }
+
+    func loadNextPage() {
+        page += 1
+        getAlbums(page: page)
     }
 }

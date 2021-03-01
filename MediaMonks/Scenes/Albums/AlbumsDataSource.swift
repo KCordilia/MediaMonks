@@ -11,7 +11,7 @@ class AlbumsDataSource: NSObject, UICollectionViewDataSource {
     var albums: [Album] = []
 
     func set(albums: [Album]) {
-        self.albums = albums
+        self.albums.append(contentsOf: albums)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

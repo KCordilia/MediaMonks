@@ -164,10 +164,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 2 nibs.
   struct nib {
     /// Nib `AlbumCollectionViewCell`.
     static let albumCollectionViewCell = _R.nib._AlbumCollectionViewCell()
+    /// Nib `PhotoCollectionViewCell`.
+    static let photoCollectionViewCell = _R.nib._PhotoCollectionViewCell()
 
     #if os(iOS) || os(tvOS)
     /// `UINib(name: "AlbumCollectionViewCell", in: bundle)`
@@ -177,17 +179,31 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "PhotoCollectionViewCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.photoCollectionViewCell) instead")
+    static func photoCollectionViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.photoCollectionViewCell)
+    }
+    #endif
+
     static func albumCollectionViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> AlbumCollectionViewCell? {
       return R.nib.albumCollectionViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? AlbumCollectionViewCell
+    }
+
+    static func photoCollectionViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PhotoCollectionViewCell? {
+      return R.nib.photoCollectionViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PhotoCollectionViewCell
     }
 
     fileprivate init() {}
   }
 
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 2 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `AlbumCollectionViewCell`.
     static let albumCollectionViewCell: Rswift.ReuseIdentifier<AlbumCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "AlbumCollectionViewCell")
+    /// Reuse identifier `PhotoCollectionViewCell`.
+    static let photoCollectionViewCell: Rswift.ReuseIdentifier<PhotoCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "PhotoCollectionViewCell")
 
     fileprivate init() {}
   }
@@ -223,6 +239,20 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> AlbumCollectionViewCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? AlbumCollectionViewCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _PhotoCollectionViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = PhotoCollectionViewCell
+
+      let bundle = R.hostingBundle
+      let identifier = "PhotoCollectionViewCell"
+      let name = "PhotoCollectionViewCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PhotoCollectionViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PhotoCollectionViewCell
       }
 
       fileprivate init() {}

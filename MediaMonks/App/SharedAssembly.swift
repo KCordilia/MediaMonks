@@ -29,7 +29,7 @@ class SharedAssembly: Assembly {
 
         // MARK: Services
         container.register(MoyaProvider<AlbumService>.self) { _ in MoyaProvider<AlbumService>() }
-
+        container.register(MoyaProvider<PhotoService>.self) { _ in MoyaProvider<PhotoService>() }
         // MARK: Storyboards
 
         container.storyboardInitCompleted(NavigationController.self) { resolver, nc in
@@ -42,9 +42,9 @@ class SharedAssembly: Assembly {
         }
 
         // Photos
-//        container.register(Storyboard.self, name: R.storyboard.photos.name) { _ in
-//            return PhotosStoryboard(sharedContainer: self.sharedContainer, assembly: PhotosAssembly())
-//        }
+        container.register(Storyboard.self, name: R.storyboard.photos.name) { _ in
+            return PhotosStoryboard(sharedContainer: self.sharedContainer, assembly: PhotosAssembly())
+        }
 
         // Photo Detail
 //        container.register(Storyboard.self, name: R.storyboard.photoDetail.name) { _ in

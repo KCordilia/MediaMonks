@@ -84,6 +84,27 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerProtocol {
 
 extension AlbumsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? AlbumCollectionViewCell else { return }
+        UIView.animate(withDuration: 0.05, animations: {
+            cell.alpha = 0.5
+            cell.albumImage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }) { (completed) in
+            UIView.animate(withDuration: 0.05) {
+                cell.alpha = 1
+                cell.albumImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+            self.router?.route(to: .photos(albumId: self.datasource.albums[indexPath.row].id))
+        }
+
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+
+        if offsetY > contentHeight - height {
+            interactor?.loadNextPage()
+        }
     }
 }
