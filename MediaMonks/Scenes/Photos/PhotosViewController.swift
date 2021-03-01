@@ -79,6 +79,10 @@ class PhotosViewController: UIViewController, PhotosViewControllerProtocol {
 }
 
 extension PhotosViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        router?.route(to: .photoDetail(photo: datasource.photos[indexPath.row]))
+    }
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if animationIndex.contains(indexPath) == false {
             cell.transform = CGAffineTransform(translationX: 0, y: collectionView.frame.height / 2)

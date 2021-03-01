@@ -23,15 +23,18 @@ class PhotosRouter: NSObject, PhotosRouterProtocol {
     //MARK: DI
     weak var viewController: PhotosViewControllerProtocol?
     private let rootNavigator: RootNavigatorProtocol
+    private let photoDetailStoryboard: Storyboard
 
     func set(viewController: PhotosViewControllerProtocol?) {
         self.viewController = viewController
     }
 
     init(
-        rootNavigator: RootNavigatorProtocol
+        rootNavigator: RootNavigatorProtocol,
+        photoDetailStoryboard: Storyboard
     ) {
         self.rootNavigator = rootNavigator
+        self.photoDetailStoryboard = photoDetailStoryboard
     }
 }
 
@@ -39,14 +42,15 @@ class PhotosRouter: NSObject, PhotosRouterProtocol {
 extension PhotosRouter {
 
     enum Scene {
-        case destination1
+        case photoDetail(photo: Photo)
     }
 
     func route(to scene: PhotosRouter.Scene) {
         switch scene {
-        case .destination1:
-            /// TODO: Implement routing
-            break
+        case .photoDetail(let photo):
+            guard let vc = photoDetailStoryboard.viewController(identifier: PhotoDetailStoryboardId.photoDetail) as? PhotoDetailViewController else { return }
+            vc.set(photo: photo)
+            viewController?.show(vc, sender: nil)
         }
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo Detail View Controller-->
+        <scene sceneID="zU6-ZV-52V">
+            <objects>
+                <viewController storyboardIdentifier="PhotoDetailViewController" id="jVF-Jz-8cJ" customClass="PhotoDetailViewController" customModule="MediaMonks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="syP-04-KKu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z0V-aq-quN">
+                                <rect key="frame" x="0.0" y="148" width="414" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nmQ-SC-1SB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="z0V-aq-quN" firstAttribute="centerX" secondItem="syP-04-KKu" secondAttribute="centerX" id="L02-2g-e7z"/>
+                            <constraint firstItem="z0V-aq-quN" firstAttribute="top" secondItem="nmQ-SC-1SB" secondAttribute="top" constant="104" id="XVC-iK-iPT"/>
+                            <constraint firstItem="z0V-aq-quN" firstAttribute="centerY" secondItem="syP-04-KKu" secondAttribute="centerY" id="ZsP-ex-Pth"/>
+                            <constraint firstItem="nmQ-SC-1SB" firstAttribute="trailing" secondItem="z0V-aq-quN" secondAttribute="trailing" id="qFu-r0-hie"/>
+                            <constraint firstItem="z0V-aq-quN" firstAttribute="leading" secondItem="nmQ-SC-1SB" secondAttribute="leading" id="tzE-aP-EzO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="z0V-aq-quN" id="Rx8-LG-B1g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kst-ef-NMU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="325" y="110"/>
+        </scene>
+    </scenes>
+</document>

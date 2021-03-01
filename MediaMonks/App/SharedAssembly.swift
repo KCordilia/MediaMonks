@@ -47,9 +47,9 @@ class SharedAssembly: Assembly {
         }
 
         // Photo Detail
-//        container.register(Storyboard.self, name: R.storyboard.photoDetail.name) { _ in
-//            return PhotoDetailStoryboard(sharedContainer: self.sharedContainer, assembly: PhotoDetailAssembly())
-//        }
+        container.register(Storyboard.self, name: R.storyboard.photoDetail.name) { _ in
+            return PhotoDetailStoryboard(sharedContainer: self.sharedContainer, assembly: PhotoDetailAssembly())
+        }
     }
 }
 

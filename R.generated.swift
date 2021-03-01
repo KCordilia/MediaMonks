@@ -89,12 +89,14 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 4 storyboards.
   struct storyboard {
     /// Storyboard `Albums`.
     static let albums = _R.storyboard.albums()
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
+    /// Storyboard `PhotoDetail`.
+    static let photoDetail = _R.storyboard.photoDetail()
     /// Storyboard `Photos`.
     static let photos = _R.storyboard.photos()
 
@@ -109,6 +111,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
     static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "PhotoDetail", bundle: ...)`
+    static func photoDetail(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.photoDetail)
     }
     #endif
 
@@ -272,6 +281,9 @@ struct _R: Rswift.Validatable {
       try launchScreen.validate()
       #endif
       #if os(iOS) || os(tvOS)
+      try photoDetail.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try photos.validate()
       #endif
     }
@@ -308,6 +320,26 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct photoDetail: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "PhotoDetail"
+      let photoDetailViewController = StoryboardViewControllerResource<PhotoDetailViewController>(identifier: "PhotoDetailViewController")
+
+      func photoDetailViewController(_: Void = ()) -> PhotoDetailViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: photoDetailViewController)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.photoDetail().photoDetailViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'photoDetailViewController' could not be loaded from storyboard 'PhotoDetail' as 'PhotoDetailViewController'.") }
       }
 
       fileprivate init() {}
