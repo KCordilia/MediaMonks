@@ -13,9 +13,12 @@
 		8AFE55C225ECE554001941DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE55C025ECE554001941DD /* Main.storyboard */; };
 		8AFE55C425ECE556001941DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE55C325ECE556001941DD /* Assets.xcassets */; };
 		8AFE55C725ECE556001941DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE55C525ECE556001941DD /* LaunchScreen.storyboard */; };
+		8AFE55E525ECE6AD001941DD /* MediaMonksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE55E425ECE6AD001941DD /* MediaMonksApp.swift */; };
+		D159E0B652EE69ACEAE33E74 /* Pods_MediaMonks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C086C8950F082A7669338F /* Pods_MediaMonks.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1EC744A4573744FE97464BB1 /* Pods-MediaMonks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaMonks.debug.xcconfig"; path = "Target Support Files/Pods-MediaMonks/Pods-MediaMonks.debug.xcconfig"; sourceTree = "<group>"; };
 		8AFE55B725ECE554001941DD /* MediaMonks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaMonks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AFE55BA25ECE554001941DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AFE55BC25ECE554001941DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		8AFE55C325ECE556001941DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8AFE55C625ECE556001941DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8AFE55C825ECE556001941DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AFE55E425ECE6AD001941DD /* MediaMonksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaMonksApp.swift; sourceTree = "<group>"; };
+		BB2D6139798CBBC74CF28B20 /* Pods-MediaMonks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaMonks.release.xcconfig"; path = "Target Support Files/Pods-MediaMonks/Pods-MediaMonks.release.xcconfig"; sourceTree = "<group>"; };
+		D3C086C8950F082A7669338F /* Pods_MediaMonks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaMonks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D159E0B652EE69ACEAE33E74 /* Pods_MediaMonks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				8AFE55B925ECE554001941DD /* MediaMonks */,
 				8AFE55B825ECE554001941DD /* Products */,
+				B90C12DD8D32861CCFC3EAAC /* Pods */,
+				C6C249B3B38D5898F64F7230 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +65,11 @@
 		8AFE55B925ECE554001941DD /* MediaMonks */ = {
 			isa = PBXGroup;
 			children = (
+				8AFE55CF25ECE63E001941DD /* App */,
+				8AFE55D125ECE64E001941DD /* Protocols */,
+				8AFE55D225ECE655001941DD /* Networking */,
+				8AFE55D325ECE65A001941DD /* Storyboards */,
+				8AFE55D425ECE65E001941DD /* Scenes */,
 				8AFE55BA25ECE554001941DD /* AppDelegate.swift */,
 				8AFE55BC25ECE554001941DD /* SceneDelegate.swift */,
 				8AFE55BE25ECE554001941DD /* ViewController.swift */,
@@ -67,6 +81,60 @@
 			path = MediaMonks;
 			sourceTree = "<group>";
 		};
+		8AFE55CF25ECE63E001941DD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8AFE55E425ECE6AD001941DD /* MediaMonksApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8AFE55D125ECE64E001941DD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8AFE55D225ECE655001941DD /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		8AFE55D325ECE65A001941DD /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		8AFE55D425ECE65E001941DD /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		B90C12DD8D32861CCFC3EAAC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1EC744A4573744FE97464BB1 /* Pods-MediaMonks.debug.xcconfig */,
+				BB2D6139798CBBC74CF28B20 /* Pods-MediaMonks.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C6C249B3B38D5898F64F7230 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3C086C8950F082A7669338F /* Pods_MediaMonks.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +142,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8AFE55CB25ECE556001941DD /* Build configuration list for PBXNativeTarget "MediaMonks" */;
 			buildPhases = (
+				7BCD9C5E702E14C121176A72 /* [CP] Check Pods Manifest.lock */,
 				8AFE55B325ECE554001941DD /* Sources */,
 				8AFE55B425ECE554001941DD /* Frameworks */,
 				8AFE55B525ECE554001941DD /* Resources */,
+				45B8E9BCBBA6B5350964F166 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +202,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		45B8E9BCBBA6B5350964F166 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MediaMonks/Pods-MediaMonks-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MediaMonks/Pods-MediaMonks-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MediaMonks/Pods-MediaMonks-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BCD9C5E702E14C121176A72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MediaMonks-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8AFE55B325ECE554001941DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,6 +252,7 @@
 				8AFE55BF25ECE554001941DD /* ViewController.swift in Sources */,
 				8AFE55BB25ECE554001941DD /* AppDelegate.swift in Sources */,
 				8AFE55BD25ECE554001941DD /* SceneDelegate.swift in Sources */,
+				8AFE55E525ECE6AD001941DD /* MediaMonksApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +396,7 @@
 		};
 		8AFE55CC25ECE556001941DD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EC744A4573744FE97464BB1 /* Pods-MediaMonks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +416,7 @@
 		};
 		8AFE55CD25ECE556001941DD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB2D6139798CBBC74CF28B20 /* Pods-MediaMonks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
