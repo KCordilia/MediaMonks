@@ -25,16 +25,20 @@ class AlbumsInteractor: AlbumsInteractorProtocol {
 
     // MARK: DI
     var presenter: AlbumsPresenterProtocol
+    private let errorHandler: ErrorHandlerProtocol
     private let provider: MoyaProvider<AlbumService>!
     private let disposeBag = DisposeBag()
     private var page = 1
 
     init(presenter: AlbumsPresenterProtocol,
+         errorHandler: ErrorHandlerProtocol,
          provider: MoyaProvider<AlbumService>) {
         self.presenter = presenter
+        self.errorHandler = errorHandler
         self.provider = provider
     }
-
+    
+    // MARK: Methods
     func handleViewDidLoad() {
         getAlbums(page: page)
     }
@@ -46,8 +50,8 @@ class AlbumsInteractor: AlbumsInteractorProtocol {
             .map([Album].self)
             .subscribe { [weak self] albums in
                 self?.presenter.presentAlbums(albums: albums)
-            } onError: { error in
-                print(error)
+            } onError: { [weak self] error in
+                self?.errorHandler.handle(error)
             }.disposed(by: disposeBag)
     }
 

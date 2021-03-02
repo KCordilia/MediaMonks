@@ -79,7 +79,6 @@ class PhotosViewController: UIViewController, PhotosViewControllerProtocol {
     }
 
     // MARK: Actions
-
 }
 
 extension PhotosViewController: UICollectionViewDelegate {
@@ -110,5 +109,3 @@ extension PhotosViewController: UICollectionViewDelegate {
         }
     }
 }
-
-

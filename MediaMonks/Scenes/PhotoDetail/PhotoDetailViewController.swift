@@ -16,7 +16,6 @@ import Kingfisher
 
 protocol PhotoDetailViewControllerProtocol: UIViewControllerRouting {
     func set(interactor: PhotoDetailInteractorProtocol)
-    func set(router: PhotoDetailRouterProtocol)
     func set(photo: Photo)
 }
 
@@ -29,14 +28,9 @@ class PhotoDetailViewController: UIViewController, PhotoDetailViewControllerProt
 
     // MARK: DI
     var interactor: PhotoDetailInteractorProtocol?
-    var router: PhotoDetailRouterProtocol?
 
     func set(interactor: PhotoDetailInteractorProtocol) {
         self.interactor = interactor
-    }
-
-    func set(router: PhotoDetailRouterProtocol) {
-        self.router = router
     }
 
     func set(photo: Photo) {

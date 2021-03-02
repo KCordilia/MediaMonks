@@ -25,8 +25,8 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerProtocol {
     
     // MARK: Properties
     private let datasource = AlbumsDataSource()
-    let splashImage = UIImageView(image: R.image.logoMm())
-    let splashView = UIView()
+    private let splashImage = UIImageView(image: R.image.logoMm())
+    private let splashView = UIView()
 
     // MARK: DI
     var interactor: AlbumsInteractorProtocol?
@@ -117,8 +117,6 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerProtocol {
     }
 
     // MARK: Actions
-
-
 }
 
 extension AlbumsViewController: UICollectionViewDelegate {

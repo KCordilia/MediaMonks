@@ -31,5 +31,4 @@ class PhotosPresenter: PhotosPresenterProtocol {
     func presentPhotos(photos: [Photo]) {
         viewController?.displayPhotos(photos: photos)
     }
-
 }

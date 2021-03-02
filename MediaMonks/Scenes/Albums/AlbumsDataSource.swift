@@ -26,6 +26,4 @@ class AlbumsDataSource: NSObject, UICollectionViewDataSource {
         cell.configure(album: albums[indexPath.row])
         return cell
     }
-
-
 }

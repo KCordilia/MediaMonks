@@ -11,7 +11,7 @@ import SwinjectAutoregistration
 class AlbumsAssembly: Assembly {
     func assemble(container: Container) {
 
-        // MARK: Home
+        // MARK: Albums
         container.register(AlbumsRouterProtocol.self) { resolver in
             return AlbumsRouter(
                 rootNavigator: resolver ~> (RootNavigatorProtocol.self),

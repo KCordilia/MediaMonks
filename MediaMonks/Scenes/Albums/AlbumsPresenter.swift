@@ -16,7 +16,6 @@ import UIKit
 protocol AlbumsPresenterProtocol {
     func set(viewController: AlbumsViewControllerProtocol?)
     func presentAlbums(albums: [Album])
-
 }
 
 class AlbumsPresenter: AlbumsPresenterProtocol {
@@ -28,12 +27,10 @@ class AlbumsPresenter: AlbumsPresenterProtocol {
         self.viewController = viewController
     }
 
+    // MARK: Methods
     func presentAlbums(albums: [Album]) {
         viewController?.displayAlbums(albums: albums)
     }
 }
 
-// MARK: Methods
-extension  AlbumsPresenter {
 
-}

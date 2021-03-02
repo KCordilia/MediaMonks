@@ -30,12 +30,12 @@ class SharedAssembly: Assembly {
         // MARK: Services
         container.register(MoyaProvider<AlbumService>.self) { _ in MoyaProvider<AlbumService>() }
         container.register(MoyaProvider<PhotoService>.self) { _ in MoyaProvider<PhotoService>() }
+
+//        container.storyboardInitCompleted(NavigationController.self) { resolver, nc in
+//            nc.prepare()
+//        }
+
         // MARK: Storyboards
-
-        container.storyboardInitCompleted(NavigationController.self) { resolver, nc in
-            nc.prepare()
-        }
-
         // Home
         container.register(Storyboard.self, name: R.storyboard.albums.name) { _ in
             return AlbumsStoryboard(sharedContainer: self.sharedContainer, assembly: AlbumsAssembly())
@@ -50,6 +50,14 @@ class SharedAssembly: Assembly {
         container.register(Storyboard.self, name: R.storyboard.photoDetail.name) { _ in
             return PhotoDetailStoryboard(sharedContainer: self.sharedContainer, assembly: PhotoDetailAssembly())
         }
+
+        // MARK: Utilities
+
+        // Error Handler
+        container.autoregister(ErrorHandlerProtocol.self, initializer: ErrorHandler.init)
+
+        // AlertPresenter
+        container.autoregister(AlertPresenterProtocol.self, initializer: AlertPresenter.init)
     }
 }
 

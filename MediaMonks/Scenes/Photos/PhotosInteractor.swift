@@ -26,6 +26,7 @@ class PhotosInteractor: PhotosInteractorProtocol {
 
     // MARK: DI
     var presenter: PhotosPresenterProtocol
+    private let errorHandler: ErrorHandlerProtocol
     private let provider: MoyaProvider<PhotoService>!
     private let disposeBag = DisposeBag()
 
@@ -33,8 +34,10 @@ class PhotosInteractor: PhotosInteractorProtocol {
     var albumId: Int?
 
     init(presenter: PhotosPresenterProtocol,
+         errorHandler: ErrorHandlerProtocol,
          provider: MoyaProvider<PhotoService>) {
         self.presenter = presenter
+        self.errorHandler = errorHandler
         self.provider = provider
     }
 
@@ -42,6 +45,7 @@ class PhotosInteractor: PhotosInteractorProtocol {
         self.albumId = albumId
     }
 
+    // MARK: Methods
     func handleViewDidLoad() {
         guard let albumId = albumId else { return }
         getPhotos(albumId: albumId, page: page)
@@ -54,8 +58,8 @@ class PhotosInteractor: PhotosInteractorProtocol {
             .map([Photo].self)
             .subscribe { [weak self] photos in
                 self?.presenter.presentPhotos(photos: photos)
-            } onError: { error in
-                print(error)
+            } onError: { [weak self] error in
+                self?.errorHandler.handle(error)
             }.disposed(by: disposeBag)
     }
 

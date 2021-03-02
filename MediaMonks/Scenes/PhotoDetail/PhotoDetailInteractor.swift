@@ -22,12 +22,6 @@ class PhotoDetailInteractor: PhotoDetailInteractorProtocol {
     var photo: Photo?
 
     // MARK: DI
-    var presenter: PhotoDetailPresenterProtocol
-
-    init(presenter: PhotoDetailPresenterProtocol) {
-        self.presenter = presenter
-    }
-
     func set(photo: Photo) {
         self.photo = photo
     }
