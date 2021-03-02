@@ -25,6 +25,8 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerProtocol {
     
     // MARK: Properties
     private let datasource = AlbumsDataSource()
+    let splashImage = UIImageView(image: R.image.logoMm())
+    let splashView = UIView()
 
     // MARK: DI
     var interactor: AlbumsInteractorProtocol?
@@ -42,11 +44,48 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.handleViewDidLoad()
+        setupSplashScreen()
         setupNavigationBar()
         setupCollectionView()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        ScaleDownAnimation()
+    }
+
     // MARK: Methods
+    func setupSplashScreen() {
+        navigationController?.navigationBar.isHidden = true
+        splashView.backgroundColor = R.color.baseColor()
+        view.addSubview(splashView)
+        splashView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+
+        splashImage.contentMode = .scaleAspectFit
+        splashView.addSubview(splashImage)
+        splashImage.frame = CGRect(x: splashView.frame.midX - 75, y: splashView.frame.midY - 40, width: 150, height: 80)
+    }
+
+    func ScaleDownAnimation() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.splashImage.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        }) { (success) in
+            self.scaleUpAnimation()
+        }
+    }
+
+    func scaleUpAnimation() {
+        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseIn, animations:  {
+            self.splashImage.transform = CGAffineTransform(scaleX: 5, y: 5)
+        }) { (success) in
+            self.removeSplashScreen()
+        }
+    }
+
+    func removeSplashScreen() {
+        splashView.removeFromSuperview()
+        navigationController?.navigationBar.isHidden = false
+    }
+
     func setupNavigationBar() {
         let imageView = UIImageView(image: R.image.logoMm())
         imageView.contentMode = .scaleAspectFit

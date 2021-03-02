@@ -24,7 +24,9 @@ class RootNavigator: RootNavigatorProtocol {
     }
 
     func setRootViewController() {
-        application.rootViewController = albumsStoryboard.initial()
+        guard let vc = albumsStoryboard.initial() else { return }
+        let navigationController = NavigationController(rootViewController: vc)
+        application.rootViewController = navigationController
     }
 }
 
