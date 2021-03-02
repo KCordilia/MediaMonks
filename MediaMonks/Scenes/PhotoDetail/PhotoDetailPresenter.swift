@@ -17,7 +17,7 @@ protocol PhotoDetailPresenterProtocol {
     func set(viewController: PhotoDetailViewControllerProtocol?)
 
     // add the functions that are called from interactor
-    func handle(error: Error)
+
 }
 
 class PhotoDetailPresenter: PhotoDetailPresenterProtocol {
@@ -33,7 +33,4 @@ class PhotoDetailPresenter: PhotoDetailPresenterProtocol {
 // MARK: Methods
 extension  PhotoDetailPresenter {
 
-    func handle(error: Error) {
-        viewController?.display(error: error)
-    }
 }

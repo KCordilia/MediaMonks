@@ -18,15 +18,14 @@ protocol PhotoDetailViewControllerProtocol: UIViewControllerRouting {
     func set(interactor: PhotoDetailInteractorProtocol)
     func set(router: PhotoDetailRouterProtocol)
     func set(photo: Photo)
-
-    // add the functions that are called from the presenter
-    func display(error: Error)
 }
 
 class PhotoDetailViewController: UIViewController, PhotoDetailViewControllerProtocol {
 
     // MARK: Outlets
     @IBOutlet weak var imageView: UIImageView!
+
+    // MARK: Properties
 
     // MARK: DI
     var interactor: PhotoDetailInteractorProtocol?
@@ -44,25 +43,27 @@ class PhotoDetailViewController: UIViewController, PhotoDetailViewControllerProt
         interactor?.set(photo: photo)
     }
 
-
-    // MARK: Properties
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupImage()
+    }
+
+    // MARK: Actions
+
+    // MARK: Methods
+    func setupImage() {
         guard let imageUrl = interactor?.photo?.url,
         let url = URL(string: imageUrl) else { return }
         imageView.kf.setImage(with: url)
     }
 
-    // MARK: Actions
-
 }
 
-// MARK: Methods
-extension PhotoDetailViewController {
-
-    func display(error: Error) {
-        //TO DO: better error handling
+extension PhotoDetailViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
     }
 }
+
+
