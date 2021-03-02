@@ -10,6 +10,9 @@ import SwinjectAutoregistration
 
 class PhotoDetailAssembly: Assembly {
     func assemble(container: Container) {
+
+        // MARK: PhotoDetail
+        
         container.autoregister(PhotoDetailInteractorProtocol.self, initializer: PhotoDetailInteractor.init)
         container.storyboardInitCompleted(PhotoDetailViewController.self) { resolver, vc in
             vc.set(interactor: resolver ~> (PhotoDetailInteractorProtocol.self))

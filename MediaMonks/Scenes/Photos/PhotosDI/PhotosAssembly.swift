@@ -11,7 +11,7 @@ import SwinjectAutoregistration
 class PhotosAssembly: Assembly {
     func assemble(container: Container) {
 
-        // MARK: Home
+        // MARK: Photos
         container.register(PhotosRouterProtocol.self) { resolver in
             return PhotosRouter(
                 rootNavigator: resolver ~> (RootNavigatorProtocol.self),
