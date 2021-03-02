@@ -17,6 +17,7 @@ protocol PhotosViewControllerProtocol: UIViewControllerRouting {
     func set(interactor: PhotosInteractorProtocol)
     func set(router: PhotosRouterProtocol)
     func set(albumId: Int)
+    func set(albumTitle: String)
     func displayPhotos(photos: [Photo])
 }
 
@@ -44,10 +45,13 @@ class PhotosViewController: UIViewController, PhotosViewControllerProtocol {
         interactor?.set(albumId: albumId)
     }
 
+    func set(albumTitle: String) {
+        title = albumTitle
+    }
+
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Photo's"
         interactor?.handleViewDidLoad()
         setupCollectionView()
     }
@@ -88,7 +92,7 @@ extension PhotosViewController: UICollectionViewDelegate {
             cell.transform = CGAffineTransform(translationX: 0, y: collectionView.frame.height / 2)
             cell.alpha = 0
 
-            UIView.animate(withDuration: 0.5, delay: 0.05*Double(indexPath.row), options: [.curveEaseInOut], animations: {
+            UIView.animate(withDuration: 0.3, delay: 0.02 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
                 cell.transform = CGAffineTransform(translationX: 0, y: 0)
                 cell.alpha = 1
             }, completion: nil)

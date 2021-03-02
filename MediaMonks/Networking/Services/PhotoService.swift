@@ -40,7 +40,7 @@ extension PhotoService: TargetType {
     var task: Task {
         switch self {
         case .getPhotos(let albumId, let page):
-            return .requestParameters(parameters: ["albumId" :albumId, "_page": page ], encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["albumId" :albumId, "_page": page, "_limit": 15 ], encoding: URLEncoding.default)
         }
     }
 

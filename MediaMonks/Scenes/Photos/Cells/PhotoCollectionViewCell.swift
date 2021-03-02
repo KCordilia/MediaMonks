@@ -10,8 +10,8 @@ import Kingfisher
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
-    var animated: Bool = false
+    private let placeholder = R.image.photo_placeholder()
     func configure(photo: Photo) {
-        imageView.kf.setImage(with: URL(string: photo.thumbnailUrl))
+        imageView.kf.setImage(with: URL(string: photo.thumbnailUrl), placeholder: placeholder)
     }
 }

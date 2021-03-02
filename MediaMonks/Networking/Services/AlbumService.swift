@@ -38,7 +38,7 @@ extension AlbumService: TargetType {
     var task: Task {
         switch self {
         case .getAlbums(let page):
-            return .requestParameters(parameters: ["_page" : page], encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["_page" : page, "_limit": 12], encoding: URLEncoding.default)
         }
     }
 

@@ -25,6 +25,9 @@ protocol PhotoDetailViewControllerProtocol: UIViewControllerRouting {
 
 class PhotoDetailViewController: UIViewController, PhotoDetailViewControllerProtocol {
 
+    // MARK: Outlets
+    @IBOutlet weak var imageView: UIImageView!
+
     // MARK: DI
     var interactor: PhotoDetailInteractorProtocol?
     var router: PhotoDetailRouterProtocol?
@@ -38,18 +41,18 @@ class PhotoDetailViewController: UIViewController, PhotoDetailViewControllerProt
     }
 
     func set(photo: Photo) {
-        imageView.kf.setImage(with: URL(string: photo.url))
+        interactor?.set(photo: photo)
     }
-    
 
-    // MARK: Outlets
-    @IBOutlet weak var imageView: UIImageView!
 
     // MARK: Properties
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let imageUrl = interactor?.photo?.url,
+        let url = URL(string: imageUrl) else { return }
+        imageView.kf.setImage(with: url)
     }
 
     // MARK: Actions

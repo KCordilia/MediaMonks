@@ -42,14 +42,15 @@ class AlbumsRouter: NSObject, AlbumsRouterProtocol {
 extension AlbumsRouter {
 
     enum Scene {
-        case photos(albumId: Int)
+        case photos(albumId: Int, albumTitle: String)
     }
 
     func route(to scene: AlbumsRouter.Scene) {
         switch scene {
-        case .photos(let albumId):
+        case .photos(let albumId, let albumTitle):
             guard let vc = photosStoryboard.viewController(identifier: PhotosStoryboardId.photos) as? PhotosViewController else { return }
             vc.set(albumId: albumId)
+            vc.set(albumTitle: albumTitle)
             viewController?.show(vc, sender: nil)
         }
     }

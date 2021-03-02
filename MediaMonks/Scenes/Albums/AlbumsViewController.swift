@@ -62,7 +62,7 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerProtocol {
 
     func setupCollectionViewLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
-            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .estimated(175)))
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .estimated(180)))
             item.contentInsets.trailing = 16
             item.contentInsets.bottom = 32
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300)), subitems: [item])
@@ -93,7 +93,8 @@ extension AlbumsViewController: UICollectionViewDelegate {
                 cell.alpha = 1
                 cell.albumImage.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
-            self.router?.route(to: .photos(albumId: self.datasource.albums[indexPath.row].id))
+            let album = self.datasource.albums[indexPath.row]
+            self.router?.route(to: .photos(albumId: album.id, albumTitle: album.title))
         }
 
     }

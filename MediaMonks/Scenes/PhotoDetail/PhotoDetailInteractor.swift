@@ -14,15 +14,21 @@
 import UIKit
 
 protocol PhotoDetailInteractorProtocol {
-    // add the functions that are called from the view controller
+    func set(photo: Photo)
+    var photo: Photo? { get }
 }
 
 class PhotoDetailInteractor: PhotoDetailInteractorProtocol {
+    var photo: Photo?
 
     // MARK: DI
     var presenter: PhotoDetailPresenterProtocol
 
     init(presenter: PhotoDetailPresenterProtocol) {
         self.presenter = presenter
+    }
+
+    func set(photo: Photo) {
+        self.photo = photo
     }
 }
